@@ -32,6 +32,7 @@ def main():
     player = Player(SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 )
 
     dt = 0
+    score = 0
 
     while True:
         for event in pygame.event.get():
@@ -43,12 +44,15 @@ def main():
         for asteroid in asteroids:
             if asteroid.collision(player):
                 print("Game over!")
+                print(score)
                 sys.exit()
         
         for asteroid in asteroids:
             for shot in shots:
                 if shot.collision(asteroid):
+                    shot.kill()
                     asteroid.split()
+                    score += 1
         
         screen.fill('Black')
 
